@@ -324,7 +324,7 @@
             "color": "#ecd297",
             "image": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657041179/products/ac3homl0yeimydql5rq4.webp"
           },
-          "fit": "True to size",
+          "fit": "Đúng với kích thước",
           "images": [],
           "_id": {
             "$oid": "62c6d15802820c409dccea3d"
@@ -347,7 +347,7 @@
             "color": "#ecd297",
             "image": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657041179/products/ac3homl0yeimydql5rq4.webp"
           },
-          "fit": "True to size",
+          "fit": "Đúng với kích thước",
           "images": [],
           "_id": {
             "$oid": "62c6d29602820c409dccea5e"
@@ -366,8 +366,8 @@
       "_id": {
         "$oid": "6342c8ce3a608a950d7e8036"
       },
-      "name": "Men Drop Shoulder Metallic Tee",
-      "description": "Men Drop Shoulder Metallic Tee",
+      "name": "Áo Thun Nam Trễ Vai Metallic",
+      "description": "Áo Thun Nam Trễ Vai Metallic",
       "brand": "Metallic ",
       "slug": "Men-Drop-Shoulder-Metallic-Tee",
       "category": {
@@ -376,50 +376,50 @@
       "subCategories": [],
       "details": [
         {
-          "name": "Color",
-          "value": "Bronze",
+          "name": "Màu sắc",
+          "value": "Nâu",
           "_id": {
             "$oid": "6342c8ce3a608a950d7e8037"
           }
         },
         {
-          "name": "Style",
-          "value": "Party",
+          "name": "Phong Cách",
+          "value": "Buổi Tiệc",
           "_id": {
             "$oid": "6342c8ce3a608a950d7e8038"
           }
         },
         {
-          "name": "Pattern Type",
-          "value": "Plain",
+          "name": "Loại Mẫu",
+          "value": "Đơn Giản",
           "_id": {
             "$oid": "6342c8ce3a608a950d7e8039"
           }
         },
         {
-          "name": "Neckline",
-          "value": "Round Neck",
+          "name": "Đường Viền Cổ Áo",
+          "value": "Cổ Tròn",
           "_id": {
             "$oid": "6342c8ce3a608a950d7e803a"
           }
         },
         {
-          "name": "Sleeve Length",
-          "value": "Short Sleeve",
+          "name": "Chiều Dài Tay Áo",
+          "value": "Ngắn Tay",
           "_id": {
             "$oid": "6342c8ce3a608a950d7e803b"
           }
         },
         {
-          "name": "Sleeve Type",
-          "value": "Regular Sleeve",
+          "name": "Loại Tay Áo",
+          "value": "Tay Áo Thường Xuyên",
           "_id": {
             "$oid": "6342c8ce3a608a950d7e803c"
           }
         },
         {
-          "name": "Length",
-          "value": "Regular",
+          "name": "Chiều Dài",
+          "value": "Thường Xuyên",
           "_id": {
             "$oid": "6342c8ce3a608a950d7e803d"
           }
@@ -500,8 +500,8 @@
       "_id": {
         "$oid": "6342cc683a608a950d7e804d"
       },
-      "name": "Men Plaid Drawstring Waist Pants",
-      "description": "Men Plaid Drawstring Waist Pants",
+      "name": "Quần Thắt Lưng Nam Kẻ Sọc",
+      "description": "Quần Thắt Lưng Nam Kẻ Sọc",
       "brand": "Drawstring ",
       "slug": "Men-Plaid-Drawstring-Waist-Pants",
       "category": {
@@ -510,36 +510,36 @@
       "subCategories": [],
       "details": [
         {
-          "name": "Color",
-          "value": "White",
+          "name": "Màu sắc",
+          "value": "Trắng",
           "_id": {
             "$oid": "6342cc683a608a950d7e804e"
           }
         },
         {
-          "name": "Style",
+          "name": "Phong Cách",
           "value": "Preppy",
           "_id": {
             "$oid": "6342cc683a608a950d7e804f"
           }
         },
         {
-          "name": "Pattern Type",
-          "value": "Plaid",
+          "name": "Loại Mẫu",
+          "value": "Kẻ Sọc",
           "_id": {
             "$oid": "6342cc683a608a950d7e8050"
           }
         },
         {
-          "name": "Type",
-          "value": "Straight Leg",
+          "name": "Kiểu",
+          "value": "Chân Thẳng",
           "_id": {
             "$oid": "6342cc683a608a950d7e8051"
           }
         },
         {
-          "name": "Closure Type",
-          "value": "Drawstring Waist",
+          "name": "Loại Đóng Kín",
+          "value": "Thắt Lưng Dây Rút",
           "_id": {
             "$oid": "6342cc683a608a950d7e8052"
           }
@@ -823,7 +823,7 @@
             "color": "#dac4ac",
             "image": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657045396/products/ouh3i2klgrmwluexm3q9.webp"
           },
-          "fit": "Small",
+          "fit": "Bé",
           "images": [
             {
               "url": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657145489/reviews/whcchkvkbd4dypptoccx.webp",
@@ -845,13 +845,13 @@
             "$oid": "62c69fc002820c409dcce9ea"
           },
           "rating": 4,
-          "review": "i like it  a lot but a bit large for me for size L",
+          "review": "Tôi rất thích nó nhưng hơi rộng đối với tôi vì cỡ L",
           "size": "L",
           "style": {
             "color": "#dac4ac",
             "image": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657045396/products/ouh3i2klgrmwluexm3q9.webp"
           },
-          "fit": "Large",
+          "fit": "Lớn",
           "images": [],
           "_id": {
             "$oid": "62c6a03702820c409dcce9f2"
@@ -874,7 +874,7 @@
             "color": "#dac4ac",
             "image": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657045396/products/ouh3i2klgrmwluexm3q9.webp"
           },
-          "fit": "Large",
+          "fit": "Lớn",
           "images": [
             {
               "url": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657189685/reviews/i6wmqtwnjcolkguit6qi.webp",
@@ -902,7 +902,7 @@
             "color": "#ecd297",
             "image": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657041179/products/ac3homl0yeimydql5rq4.webp"
           },
-          "fit": "True to size",
+          "fit": "Đúng với kích thước",
           "images": [],
           "_id": {
             "$oid": "62c6d15802820c409dccea3d"
@@ -925,7 +925,7 @@
             "color": "#ecd297",
             "image": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657041179/products/ac3homl0yeimydql5rq4.webp"
           },
-          "fit": "True to size",
+          "fit": "Đúng với kích thước",
           "images": [],
           "_id": {
             "$oid": "62c6d29602820c409dccea5e"

@@ -15,7 +15,7 @@
     "_id": {
       "$oid": "62c46ff0062128444ad59193"
     },
-    "name": "Women's Clothing",
+    "name": "Thời Trang Nữ",
     "slug": "women's-clothing",
     "createdAt": {
       "$date": "2022-07-05T17:08:00.067Z"
@@ -28,7 +28,7 @@
     "_id": {
       "$oid": "62cfeb1e119f0cd432b478d6"
     },
-    "name": "Men's Clothing",
+    "name": "Thời Trang Nam",
     "slug": "men's-clothing",
     "createdAt": {
       "$date": "2022-07-14T10:08:30.799Z"
@@ -41,7 +41,7 @@
     "_id": {
       "$oid": "62d69f9e60276c9915a995b8"
     },
-    "name": "Women Clothing",
+    "name": "Thời Trang Nữ",
     "slug": "women-clothing",
     "createdAt": {
       "$date": "2022-07-19T12:12:14.124Z"
