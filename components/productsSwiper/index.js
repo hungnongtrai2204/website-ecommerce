@@ -55,7 +55,14 @@ export default function ProductsSwiper({ header, products, bg }) {
                     ? `${product.name.slice(0, 30)}...`
                     : product.name}
                 </h1>
-                {product.price && <span>{product.price}đ</span>}
+                {product.price && (
+                  <span>
+                    {(+product.price).toLocaleString("it-IT", {
+                      style: "currency",
+                      currency: "VND",
+                    })}
+                  </span>
+                )}
               </div>
             </div>
           </SwiperSlide>

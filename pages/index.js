@@ -16,12 +16,14 @@ import {
 } from "../data/home";
 import { useMediaQuery } from "react-responsive";
 import ProductsSwiper from "../components/productsSwiper";
+import db from "@/utils/db";
+import Product from "@/models/Product";
+import ProductCard from "@/components/productCard";
 
-export default function Home({ country }) {
+export default function Home({ country, products }) {
   const { data: session } = useSession();
   const isMedium = useMediaQuery({ query: "(max-width: 850px)" });
   const isMobile = useMediaQuery({ query: "(max-width: 550px)" });
-  console.log(session);
   return (
     <>
       <Header country={country} />
@@ -55,8 +57,12 @@ export default function Home({ country }) {
               background="#000"
             />
           </div>
-          <ProductsSwiper products={women_swiper} />
           <ProductsSwiper
+            products={women_swiper}
+            header="Thời Trang Nữ"
+            bg="#F2BED1"
+          />
+          {/* <ProductsSwiper
             products={gamingSwiper}
             header="Dành Cho Game Thủ"
             bg="#2f82ff"
@@ -65,7 +71,12 @@ export default function Home({ country }) {
             products={homeImprovSwiper}
             header="Cải Tạo Nhà"
             bg="#5a31f4"
-          />
+          /> */}
+          <div className={styles.products}>
+            {products.map((product) => (
+              <ProductCard product={product} key={product._id} />
+            ))}
+          </div>
         </div>
       </div>
       <Footer country={country} />
@@ -74,6 +85,9 @@ export default function Home({ country }) {
 }
 
 export const getServerSideProps = async () => {
+  db.connectDB();
+  let products = await Product.find().sort({ createdAt: -1 }).lean();
+
   let data = await axios
     .get("https://api.ipregistry.co/?key=s6nqi028kbnmc39f")
     .then((response) => response.data.location.country)
@@ -87,6 +101,7 @@ export const getServerSideProps = async () => {
         name: data.name,
         flag: data.flag.emojitwo,
       },
+      products: JSON.parse(JSON.stringify(products)),
     },
   };
 };

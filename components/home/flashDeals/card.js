@@ -16,15 +16,23 @@ export default function FlashCard({ product }) {
       </div>
       <div className={styles.card__price}>
         <span>
-          {(product.price - product.price / product.discount).toFixed(2)}đ
+          {(product.price - product.price / product.discount).toLocaleString(
+            "it-IT",
+            {
+              style: "currency",
+              currency: "VND",
+            }
+          )}
         </span>
         <span>
           -
           {(
             product.price -
             (product.price - product.price / product.discount)
-          ).toFixed(2)}
-          đ
+          ).toLocaleString("it-IT", {
+            style: "currency",
+            currency: "VND",
+          })}
         </span>
       </div>
       <div className={styles.card__bar}>

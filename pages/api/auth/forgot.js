@@ -22,6 +22,7 @@ router.post(async (req, res) => {
       id: user._id.toString(),
     });
     const url = `${process.env.BASE_URL}/auth/reset/${user_id}`;
+
     sendEmail(email, url, "", "Đặt lại mật khẩu của bạn.", resetEmailTemplate);
     await db.disconnectDB();
     res.json({

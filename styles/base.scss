@@ -48,6 +48,10 @@ $shadow-2: rgba(99, 99, 99, 0.1) 0px 0px 4px 0px;
   gap: 5px;
 }
 
+.wrap {
+  flex-wrap: wrap;
+}
+
 .error {
   padding: 10px;
   color: $error-color;
@@ -83,7 +87,7 @@ $shadow-2: rgba(99, 99, 99, 0.1) 0px 0px 4px 0px;
 }
 
 .swiper {
-  margin-left: auto;
+  margin-left: 0 !important;
   margin-right: auto;
   cursor: pointer;
   &:hover {
@@ -260,6 +264,23 @@ $shadow-2: rgba(99, 99, 99, 0.1) 0px 0px 4px 0px;
     box-shadow: $shadow-1;
     &::after {
       transform: scale(0.5);
+    }
+  }
+}
+
+.simillar_swiper {
+  max-width: 550px;
+  .swiper-pagination {
+    display: none !important;
+  }
+  img {
+    width: 100px;
+    height: 160px;
+    object-fit: cover;
+    cursor: pointer;
+    @media (min-width: 461px) {
+      width: 150px;
+      height: 200px;
     }
   }
 }

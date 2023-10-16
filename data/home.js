@@ -46,7 +46,7 @@ export const offersArray = [
 
 export const menuArray = [
   {
-    name: "Women's Fashion",
+    name: "Thời Trang Nữ",
     link: "",
     subMenu: [
       {
@@ -58,7 +58,7 @@ export const menuArray = [
     images: [],
   },
   {
-    name: "Men's Fashion",
+    name: "Thời Trang Nam",
     link: "",
     subMenu: [
       {
@@ -70,7 +70,7 @@ export const menuArray = [
     images: [],
   },
   {
-    name: "Electronics",
+    name: "Thiết Bị Điện Tử",
     link: "",
     subMenu: [
       {
@@ -82,7 +82,7 @@ export const menuArray = [
     images: [],
   },
   {
-    name: "Jewlery & Watches",
+    name: "Đá Quý & Đồng Hồ",
     link: "",
     subMenu: [
       {
@@ -94,7 +94,7 @@ export const menuArray = [
     images: [],
   },
   {
-    name: "Home, Pet & Appliances",
+    name: "Gia Đình, Thú Cưng & Thiết Bị",
     link: "",
     subMenu: [
       {
@@ -106,20 +106,7 @@ export const menuArray = [
     images: [],
   },
   {
-    name: "Beauty, Health & Hair",
-    link: "",
-    subMenu: [
-      {
-        name: "",
-        link: "",
-      },
-    ],
-    brands: [],
-    images: [],
-  },
-
-  {
-    name: "Shoes,Sneakers,Heels",
+    name: "Sắc Đẹp, Sức Khỏe & Tóc",
     link: "",
     subMenu: [
       {
@@ -132,7 +119,7 @@ export const menuArray = [
   },
 
   {
-    name: "Accessories",
+    name: "Giày Thể thao, Giày Cao Gót",
     link: "",
     subMenu: [
       {
@@ -145,7 +132,20 @@ export const menuArray = [
   },
 
   {
-    name: "Sports & Entertainment ",
+    name: "Phụ Kiện",
+    link: "",
+    subMenu: [
+      {
+        name: "",
+        link: "",
+      },
+    ],
+    brands: [],
+    images: [],
+  },
+
+  {
+    name: "Thể Thao & Giải Trí",
     link: "",
     subMenu: [
       {
@@ -157,7 +157,7 @@ export const menuArray = [
     images: [],
   },
   {
-    name: "Kids & Babies",
+    name: "Trẻ Em & Trẻ Sơ Sinh",
     link: "",
     subMenu: [
       {
@@ -169,7 +169,7 @@ export const menuArray = [
     images: [],
   },
   {
-    name: "Movies & Television",
+    name: "Phim & Truyền Hình",
     link: "",
     subMenu: [
       {
@@ -181,7 +181,7 @@ export const menuArray = [
     images: [],
   },
   {
-    name: "Gaming, Video Games",
+    name: "Trò Chơi, Trò Chơi Điện Tử",
     link: "",
     subMenu: [
       {
@@ -193,7 +193,7 @@ export const menuArray = [
     images: [],
   },
   {
-    name: "Phones & Telecommunications",
+    name: "Điện Thoại & Viễn Thông",
     link: "",
     subMenu: [
       {
@@ -205,7 +205,7 @@ export const menuArray = [
     images: [],
   },
   {
-    name: "Toys & Hobbies",
+    name: "Đồ Chơi & Sở Thích",
     link: "",
     subMenu: [
       {
@@ -217,7 +217,7 @@ export const menuArray = [
     images: [],
   },
   {
-    name: "Gifts & Crafts",
+    name: "Quà Tặng & Thủ Công Mỹ Nghệ",
     link: "",
     subMenu: [
       {
@@ -229,7 +229,7 @@ export const menuArray = [
     images: [],
   },
   {
-    name: "Machinery",
+    name: "Máy Móc",
     link: "",
     subMenu: [
       {
@@ -241,7 +241,7 @@ export const menuArray = [
     images: [],
   },
   {
-    name: "Security, Safety",
+    name: "An Toàn, An Ninh",
     link: "",
     subMenu: [
       {
@@ -296,7 +296,7 @@ export const flashDealsArray = [
   {
     image:
       "https://img.ltwebstatic.com/images3_pi/2022/09/15/1663220709c947ca4ad9aefd9c1f4baf5915653468_thumbnail_600x.webp",
-    price: "91",
+    price: "2220000",
     discount: "11",
     link: "",
     sold: "30",
@@ -304,7 +304,7 @@ export const flashDealsArray = [
   {
     image:
       "https://img.ltwebstatic.com/images3_pi/2022/09/20/1663668243e6d8f250648c2f34988320c046cba68f_thumbnail_405x552.webp",
-    price: "73",
+    price: "1781000",
     discount: "25",
     link: "",
     sold: "61",
@@ -312,7 +312,7 @@ export const flashDealsArray = [
   {
     image:
       "https://img.ltwebstatic.com/images3_pi/2022/03/25/164818761997d2ccb1de50aed18da9d77502717405_thumbnail_405x552.webp",
-    price: "254",
+    price: "6197600",
     discount: "36",
     link: "",
     sold: "12",
@@ -320,7 +320,7 @@ export const flashDealsArray = [
   {
     image:
       "https://img.ltwebstatic.com/images3_pi/2022/05/13/165244123600952e503ccab89dd363c9b71f9094f8_thumbnail_405x552.webp",
-    price: "1687",
+    price: "41162800",
     discount: "20",
     link: "",
     sold: "96",
@@ -328,7 +328,7 @@ export const flashDealsArray = [
   {
     image:
       "https://img.ltwebstatic.com/images3_pi/2022/06/17/16554568735029a68267cacc48382e23027667093f_thumbnail_405x552.webp",
-    price: "126",
+    price: "3074400",
     discount: "8",
     link: "",
     sold: "12",
@@ -336,7 +336,7 @@ export const flashDealsArray = [
   {
     image:
       "https://img.ltwebstatic.com/images3_pi/2022/08/17/16607290552013caeedd00666350d71774fcd6e95f_thumbnail_405x552.webp",
-    price: "65",
+    price: "1586000",
     discount: "7",
     link: "",
     sold: "82",
@@ -344,7 +344,7 @@ export const flashDealsArray = [
   {
     image:
       "https://img.ltwebstatic.com/images3_pi/2022/09/02/166210785062f36a63bcecd00693783c4b6cd0c2a2_thumbnail_600x.webp",
-    price: "41",
+    price: "1000400",
     discount: "9",
     link: "",
     sold: "52",
@@ -352,7 +352,7 @@ export const flashDealsArray = [
   {
     image:
       "https://img.ltwebstatic.com/images3_pi/2022/09/01/1662028598b9164c30a8410fc9d71b81fc63748d4e_thumbnail_405x552.webp",
-    price: "288",
+    price: "7027200",
     discount: "35",
     link: "",
     sold: "49",
@@ -446,58 +446,58 @@ export const women_accessories = [
 
 export const women_swiper = [
   {
-    name: "HARRY POTTER | SHEIN Checkered & Snake Pattern Sweater Vest Without Blouse",
+    name: "HARRY POTTER | SHEIN Áo len ca rô & họa tiết rắn không kèm áo sơ mi",
     image:
       "https://img.ltwebstatic.com/images3_pi/2022/06/21/1655799794344eb21cae76cf679de869f6b6e41229_thumbnail_600x.webp",
-    price: "103",
+    price: "2513200",
   },
   {
-    name: "Blazer manches cape à bouton",
+    name: "Áo khoác blazer tay áo có nút",
     image:
       "https://img.ltwebstatic.com/images3_pi/2022/09/13/1663060175905a8d4a3995fd5bc4c4827114c4b070_thumbnail_900x.webp",
-    price: "58",
+    price: "400000",
   },
   {
-    name: "SHEIN X Zhihan Wang Sweat-shirt dessin animé et slogan",
+    name: "SHEIN X Zhihan Wang Áo khẩu hiệu hoạt hình",
     image:
       "https://img.ltwebstatic.com/images3_pi/2022/09/29/1664415954a61747c30c7e9576fd4374354dad4b54_thumbnail_900x.webp",
-    price: "12.99",
+    price: "340000",
   },
   {
-    name: "ROMWE Grunge Punk Sweat-shirt à capuche à imprimé lettre et graphique à cordon",
+    name: "Áo nỉ có mũ trùm đầu dây rút ROMWE Punk Punk Punk",
     image:
       "https://img.ltwebstatic.com/images3_pi/2022/09/14/166312290414845f283801744986928b2d3dd8d2a9_thumbnail_405x552.webp",
-    price: "396",
+    price: "700000",
   },
   {
-    name: "15pcs Gemstone & Rhinestone Decor Ring",
+    name: "15 chiếc nhẫn trang trí bằng đá quý và kim cương giả",
     image:
       "https://img.ltwebstatic.com/images3_pi/2022/08/24/16613054802b93849c39b4b566941f1b5ebe9a1626_thumbnail_600x.webp",
-    price: "5.31",
+    price: "300000",
   },
   {
-    name: "5pcs Halloween Pumpkin & Ghost Design Shoe Decoration",
+    name: "5 phụ kiện trang trí giày hình quả bí ngô và ma Halloween",
     image:
       "https://img.ltwebstatic.com/images3_pi/2022/08/18/166082359241270ee7699993abcaefaad6fdedcfc2_thumbnail_600x.webp",
-    price: "79.25",
+    price: "40000",
   },
   {
-    name: "10pcs Solid Hair Band",
+    name: "10 chiếc dây buộc tóc chắc chắn",
     image:
       "https://img.ltwebstatic.com/images3_pi/2022/07/11/16575212726da2c7d3a0580bc5cfcfeb153d622924_thumbnail_600x.webp",
-    price: "3.69",
+    price: "20000",
   },
   {
-    name: "Rhinestone Decor Bracelet With Ring",
+    name: "Vòng tay trang trí bằng kim cương có nhẫn",
     image:
       "https://img.ltwebstatic.com/images3_pi/2021/07/30/1627631651e33bb2d80d523abbcc83e3e18a43e76a_thumbnail_600x.webp",
-    price: "12.5",
+    price: "540000",
   },
   {
-    name: "Colorful Leaf Print Pocket Front Backpack",
+    name: "Ba lô phía trước in hình lá đầy màu sắc",
     image:
       "https://img.ltwebstatic.com/images3_pi/2022/05/27/16536468000ce423c3ae45c06b70ae48ef8c78ecde_thumbnail_405x552.webp",
-    price: "11.58",
+    price: "980000",
   },
 ];
 

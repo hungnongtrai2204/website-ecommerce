@@ -40,7 +40,7 @@ router.post(async (req, res) => {
       id: addedUser._id.toString(),
     });
     const url = `${process.env.BASE_URL}/active/${activation_token}`;
-    sendEmail(
+    await sendEmail(
       email,
       url,
       "",

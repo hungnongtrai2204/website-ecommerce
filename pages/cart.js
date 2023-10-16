@@ -1,31 +1,77 @@
-import React from "react";
-import styles from "../styles/page.module.scss";
-import Header from "../components/header";
-import Footer from "../components/footer";
-import axios from "axios";
-export default function Cart({ country }) {
+import React, { useEffect, useState } from "react";
+import styles from "../styles/cart.module.scss";
+import Header from "@/components/cart/header";
+import Empty from "@/components/cart/empty";
+import { useDispatch, useSelector } from "react-redux";
+import Product from "@/components/cart/product";
+import CartHeader from "@/components/cart/cartHeader";
+import Checkout from "@/components/cart/checkout";
+import PaymentMethods from "@/components/cart/paymentMethods";
+import ProductsSwiper from "@/components/productsSwiper";
+import { women_swiper } from "@/data/home";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { saveCart } from "@/requests/user";
+export default function Cart() {
+  const router = useRouter();
+  const { data: session } = useSession();
+  const [selected, setSelected] = useState([]);
+  const { cart } = useSelector((state) => ({ ...state }));
+  const dispatch = useDispatch();
+
+  const [shippingFee, setShippingFee] = useState(0);
+  const [subtotal, setSubtotal] = useState(0);
+  const [total, setTotal] = useState(0);
+  useEffect(() => {
+    setShippingFee(selected.reduce((a, c) => a + Number(c.shipping), 0));
+    setSubtotal(selected.reduce((a, c) => a + c.price * c.qty, 0));
+    setTotal(
+      selected.reduce((a, c) => a + c.price * c.qty, 0) + Number(shippingFee)
+    );
+  }, [selected]);
+  const saveCartToDbHandler = async () => {
+    if (session) {
+      const res = saveCart(selected);
+      router.push("/checkout");
+    } else {
+      signIn();
+    }
+  };
   return (
-    <div className={styles.container}>
-      <Header country={country} />
-      <p>cart</p>
-      <Footer country={country} />
-    </div>
+    <>
+      <Header />
+      <div className={styles.cart}>
+        {cart.cartItems.length > 0 ? (
+          <div className={styles.cart__container}>
+            <CartHeader
+              cartItems={cart.cartItems}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <div className={styles.cart__products}>
+              {cart.cartItems.map((product) => (
+                <Product
+                  product={product}
+                  key={product._uid}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+              ))}
+            </div>
+            <Checkout
+              subtotal={subtotal}
+              shippingFee={shippingFee}
+              total={total}
+              selected={selected}
+              saveCartToDbHandler={saveCartToDbHandler}
+            />
+            <PaymentMethods />
+          </div>
+        ) : (
+          <Empty />
+        )}
+        <ProductsSwiper products={women_swiper} />
+      </div>
+    </>
   );
 }
-export const getServerSideProps = async () => {
-  let data = await axios
-    .get("https://api.ipregistry.co/?key=s6nqi028kbnmc39f")
-    .then((response) => response.data.location.country)
-    .catch((error) => {
-      console.log(error);
-    });
-
-  return {
-    props: {
-      country: {
-        name: data.name,
-        flag: data.flag.emojitwo,
-      },
-    },
-  };
-};
