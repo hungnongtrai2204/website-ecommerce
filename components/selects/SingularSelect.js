@@ -6,16 +6,33 @@ export default function SingularSelect({
   data,
   handleChange,
   placeholder,
+  header,
+  disabled,
   ...rest
 }) {
   const [field, meta] = useField(rest);
   return (
     <div style={{ marginBottom: "1rem" }}>
+      {header && (
+        <div
+          className={`${styles.header} ${
+            meta.error ? styles.header__error : ""
+          }`}
+        >
+          <div className={styles.flex}>
+            {meta.error && (
+              <img src="../../../images/warning.png" alt="warning" />
+            )}
+            {header}
+          </div>
+        </div>
+      )}
       <TextField
         variant="outlined"
         name={field.name}
         select
         label={placeholder}
+        disabled={disabled}
         value={field.value}
         onChange={handleChange}
         className={`${styles.select} ${
@@ -26,7 +43,7 @@ export default function SingularSelect({
           Không được chọn / Hoặc trống
         </MenuItem>
         {data.map((option) => (
-          <MenuItem key={option._id} value={option.name}>
+          <MenuItem key={option._id} value={option._id || option.name}>
             {option.name}
           </MenuItem>
         ))}

@@ -15,7 +15,7 @@ router.post(async (req, res) => {
     let user = await User.findById(req.user);
     let existing_cart = await Cart.findOne({ user: user._id });
     if (existing_cart) {
-      await existing_cart.remove();
+      await Cart.deleteOne({ _id: existing_cart._id });
     }
     for (let i = 0; i < cart.length; i++) {
       let dbProduct = await Product.findById(cart[i]._id).lean();
@@ -49,6 +49,7 @@ router.post(async (req, res) => {
       user: user._id,
     }).save();
     db.disconnectDB();
+    return res.json({ message: "Success" });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

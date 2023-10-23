@@ -5,7 +5,8 @@ import { persistReducer } from "redux-persist";
 // import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
 import cart from "./cartSlice";
-
+import expandSidebar from "./expandSlice";
+import dialog from "./DialogSlice";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 const createNoopStorage = () => {
   return {
@@ -27,6 +28,8 @@ const storage =
 
 const reducers = combineReducers({
   cart,
+  expandSidebar,
+  dialog,
 });
 
 const config = {

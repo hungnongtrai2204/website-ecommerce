@@ -17,7 +17,7 @@ export default function Reviews({ product }) {
               <Rating
                 name="half-rating-read"
                 defaultValue={product.rating}
-                precision={0.5}
+                // precision={0.5}
                 readOnly
                 style={{ color: "#FACF19" }}
               />

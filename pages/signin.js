@@ -16,7 +16,7 @@ import {
   signIn,
 } from "next-auth/react";
 import DotLoaderSpinner from "../components/loaders/dotLoader";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 const initialvalues = {
   login_email: "",
   login_password: "",
@@ -31,6 +31,7 @@ const initialvalues = {
 export default function signin({ country, providers, callbackUrl, csrfToken }) {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(initialvalues);
+  const router = useRouter();
   const {
     login_email,
     login_password,
@@ -95,7 +96,8 @@ export default function signin({ country, providers, callbackUrl, csrfToken }) {
           password: password,
         };
         const res = await signIn("credentials", options);
-        Router.push("/");
+        // Router.push("/");
+        router.push("/");
       }, 2000);
     } catch (error) {
       setLoading(false);
@@ -120,7 +122,8 @@ export default function signin({ country, providers, callbackUrl, csrfToken }) {
       setLoading(false);
       setUser((preValue) => ({ ...preValue, login_error: res?.error }));
     } else {
-      return Router.push(callbackUrl || "/");
+      // return Router.push(callbackUrl || "/");
+      return router.push(callbackUrl || "/");
     }
   };
   return (

@@ -61,10 +61,11 @@ export default NextAuth({
     }),
   ],
   callbacks: {
-    session: async ({ session, token }) => {
+    async session({ session, token }) {
       const user = await User.findById(token.sub);
       session.user.id = token.sub || user._id.toString();
       session.user.role = user.role || "user";
+      token.role = user.role || "user";
       return session;
     },
   },

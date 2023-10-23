@@ -12,12 +12,15 @@ import { women_swiper } from "@/data/home";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { saveCart } from "@/requests/user";
+import { emptyCart } from "@/store/cartSlice";
+import DotLoaderSpinner from "@/components/loaders/dotLoader";
 export default function Cart() {
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
   const router = useRouter();
   const { data: session } = useSession();
   const [selected, setSelected] = useState([]);
   const { cart } = useSelector((state) => ({ ...state }));
-  const dispatch = useDispatch();
 
   const [shippingFee, setShippingFee] = useState(0);
   const [subtotal, setSubtotal] = useState(0);
@@ -31,14 +34,18 @@ export default function Cart() {
   }, [selected]);
   const saveCartToDbHandler = async () => {
     if (session) {
-      const res = saveCart(selected);
-      router.push("/checkout");
+      setLoading(true);
+      const res = await saveCart(selected);
+      dispatch(emptyCart());
+      await router.push("/checkout");
+      setLoading(false);
     } else {
       signIn();
     }
   };
   return (
     <>
+      {loading && <DotLoaderSpinner loading={loading} />}
       <Header />
       <div className={styles.cart}>
         {cart.cartItems.length > 0 ? (
