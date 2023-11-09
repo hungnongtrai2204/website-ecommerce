@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
           name="description"
           content="Shoppay-online shopping service for all of your needs."
         />
-        {/* <link rel="icon" href="/favicon.ico" /> */}
+        <link rel="shortcut icon" href="#" />
       </Head>
       <SessionProvider session={session}>
         <Provider store={store}>
