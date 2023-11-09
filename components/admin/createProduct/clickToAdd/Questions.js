@@ -3,55 +3,55 @@ import styles from "./styles.module.scss";
 import { sizesList } from "@/data/sizes";
 import { BsFillPatchMinusFill, BsFillPatchPlusFill } from "react-icons/bs";
 
-export default function Details({ details, product, setProduct }) {
-  const handleDetails = (i, e) => {
-    const values = [...details];
+export default function Questions({ questions, product, setProduct }) {
+  const handleQuestion = (i, e) => {
+    const values = [...questions];
     values[i][e.target.name] = e.target.value;
-    setProduct({ ...product, details: values });
+    setProduct({ ...product, questions: values });
   };
   const handleRemove = (i) => {
-    if (details.length > 0) {
-      const values = [...details];
+    if (questions.length > 0) {
+      const values = [...questions];
       values.splice(i, 1);
-      setProduct({ ...product, details: values });
+      setProduct({ ...product, questions: values });
     }
   };
-  console.log("product details", product.details);
   return (
     <div>
-      <div className={styles.header}>Chi Tiết</div>
-      {details.length == 0 && (
+      <div className={styles.header}>Câu Hỏi</div>
+      {questions.length == 0 && (
         <BsFillPatchPlusFill
+          className={styles.svg}
           onClick={() => {
             setProduct({
               ...product,
-              details: [
-                ...details,
+              questions: [
+                ...questions,
                 {
-                  name: "",
-                  value: "",
+                  quetion: "",
+                  answer: "",
                 },
               ],
             });
           }}
         />
       )}
-      {details
-        ? details.map((detail, i) => (
+      {questions
+        ? questions.map((q, i) => (
             <div className={styles.clicktoadd} key={i}>
               <input
                 type="text"
-                name="name"
-                placeholder="Tên"
-                value={detail.name}
-                onChange={(e) => handleDetails(i, e)}
+                name="question"
+                placeholder="Câu Hỏi"
+                value={q.question}
+                onChange={(e) => handleQuestion(i, e)}
               />
               <input
                 type="text"
-                name="value"
-                placeholder="Giá Trị"
-                value={detail.value}
-                onChange={(e) => handleDetails(i, e)}
+                name="answer"
+                placeholder="Trả Lời"
+                value={q.answer}
+                onChange={(e) => handleQuestion(i, e)}
               />
               <>
                 <BsFillPatchMinusFill onClick={() => handleRemove(i)} />
@@ -59,11 +59,11 @@ export default function Details({ details, product, setProduct }) {
                   onClick={() => {
                     setProduct({
                       ...product,
-                      details: [
-                        ...details,
+                      questions: [
+                        ...questions,
                         {
-                          name: "",
-                          value: "",
+                          question: "",
+                          answer: "",
                         },
                       ],
                     });

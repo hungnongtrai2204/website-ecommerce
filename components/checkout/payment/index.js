@@ -1,12 +1,14 @@
 import { paymentMethods } from "@/data/paymentMethods";
 import styles from "./styles.module.scss";
 
-export default function Payment({ paymentMethod, setPaymentMethod }) {
+export default function Payment({ paymentMethod, setPaymentMethod, profile }) {
   return (
     <div className={styles.payment}>
-      <div className={styles.header}>
-        <h3>Phương Thức Thanh Toán</h3>
-      </div>
+      {!profile && (
+        <div className={styles.header}>
+          <h3>Phương Thức Thanh Toán</h3>
+        </div>
+      )}
       {paymentMethods.map((pm) => (
         <label
           htmlFor={pm.id}

@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
@@ -65,6 +66,17 @@ const userSchema = new mongoose.Schema(
         active: {
           type: Boolean,
           default: false,
+        },
+      },
+    ],
+    wishlist: [
+      {
+        product: {
+          type: ObjectId,
+          ref: "Product",
+        },
+        style: {
+          type: String,
         },
       },
     ],

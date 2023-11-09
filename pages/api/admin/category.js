@@ -1,9 +1,10 @@
+import admin from "@/middleware/admin";
 import auth from "@/middleware/auth";
 import Category from "@/models/Category";
 import db from "@/utils/db";
 import { createRouter } from "next-connect";
 import slugify from "slugify";
-const router = createRouter().use(auth);
+const router = createRouter().use(auth).use(admin);
 
 router.post(async (req, res) => {
   try {

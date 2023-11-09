@@ -103,6 +103,16 @@
       min-height: 150px;
       padding: 1rem;
     }
+    .login_btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .disabled {
+      cursor: not-allowed;
+      background: #cccccc4f;
+    }
   }
 }
 .imgs_wrap {

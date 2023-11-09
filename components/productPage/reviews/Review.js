@@ -17,7 +17,8 @@ export default function Review({ review }) {
         <div className={styles.review__review}>
           <Rating
             name="half-rating-read"
-            defaultValue={review.rating}
+            value={review.rating}
+            // precision={0.5}
             readOnly
             style={{ color: "#facf19" }}
           />
@@ -50,7 +51,7 @@ export default function Review({ review }) {
             <AiOutlineLike />
           </div>
           <div className={styles.review__extra_date}>
-            {review.updatedAt.slice(0, 10)}
+            {review?.updatedAt?.slice(0, 10)}
           </div>
         </div>
       </div>

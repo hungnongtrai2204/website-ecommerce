@@ -21,7 +21,7 @@ export default function Images({
   const handleImages = (e) => {
     let files = Array.from(e.target.files);
     files.forEach((img, i) => {
-      if (i == 5 || images.length == 6) {
+      if (images.length == 6) {
         dispatch(
           showDialog({
             header: "Tối đa 6 hình ảnh được cho phép.",

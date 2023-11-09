@@ -69,7 +69,7 @@ export default function Sidebar() {
             </Link>
           </li>
           <li className={route == "orders" ? styles.active : ""}>
-            <Link href="/admin/dashboard/roders">
+            <Link href="/admin/dashboard/orders">
               <IoListCircleSharp />
               <span className={styles.show}>Đơn Đặt Hàng</span>
             </Link>

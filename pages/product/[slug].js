@@ -60,10 +60,7 @@ export async function getServerSideProps(context) {
       path: "category",
       model: Category,
     })
-    .populate({
-      path: "subCategories._id",
-      model: SubCategory,
-    })
+    .populate({ path: "subCategories", model: SubCategory })
     .populate({
       path: "reviews.reviewBy",
       model: User,
@@ -71,7 +68,6 @@ export async function getServerSideProps(context) {
     .lean();
   let subProduct = product.subProducts[style];
   let prices = subProduct.sizes.map((s) => s.price).sort((a, b) => a - b);
-  console.log(subProduct);
   const newProduct = {
     ...product,
     style,
@@ -121,21 +117,22 @@ export async function getServerSideProps(context) {
     quantity: subProduct.sizes[size].qty,
     ratings: [
       {
-        percentage: 76,
+        percentage: calculatePercentage("5"),
       },
       {
-        percentage: 14,
+        percentage: calculatePercentage("4"),
       },
       {
-        percentage: 6,
+        percentage: calculatePercentage("3"),
       },
       {
-        percentage: 4,
+        percentage: calculatePercentage("2"),
       },
       {
-        percentage: 0,
+        percentage: calculatePercentage("1"),
       },
     ],
+    reviews: product.reviews.reverse(),
     allSizes: product.subProducts
       .map((p) => p.sizes)
       .flat()
@@ -147,6 +144,18 @@ export async function getServerSideProps(context) {
   };
 
   //------------
+  function calculatePercentage(num) {
+    return (
+      (product.reviews.reduce((a, review) => {
+        return (
+          a +
+          (review.rating == Number(num) || review.rating == Number(num) + 0.5)
+        );
+      }, 0) *
+        100) /
+      product.reviews.length
+    ).toFixed(1);
+  }
   db.disconnectDB();
   return {
     props: {

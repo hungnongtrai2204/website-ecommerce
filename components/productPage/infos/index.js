@@ -11,9 +11,13 @@ import SimillarSwiper from "./SimillarSwiper";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, updateCart } from "@/store/cartSlice";
+import { signIn, useSession } from "next-auth/react";
+import { showDialog } from "@/store/DialogSlice";
+import DialogModal from "@/components/dialogModal";
 
 export default function Infos({ product, setActiveImg }) {
   const router = useRouter();
+  const { data: session } = useSession();
   const dispatch = useDispatch();
   const [size, setSize] = useState(router.query.size);
   const [qty, setQty] = useState(1);
@@ -66,8 +70,43 @@ export default function Infos({ product, setActiveImg }) {
       }
     }
   };
+  const handleWishlist = async () => {
+    try {
+      if (!session) {
+        return signIn();
+      }
+      const { data } = await axios.put("/api/user/wishlist", {
+        product_id: product._id,
+        style: product.style,
+      });
+      dispatch(
+        showDialog({
+          header: "Sản phẩm được thêm vào danh sách yêu thích thành công",
+          msgs: [
+            {
+              msg: data.message,
+              type: "success",
+            },
+          ],
+        })
+      );
+    } catch (error) {
+      dispatch(
+        showDialog({
+          header: "Lỗi danh sách yêu thích",
+          msgs: [
+            {
+              msg: error.response.data.message,
+              type: "error",
+            },
+          ],
+        })
+      );
+    }
+  };
   return (
     <div className={styles.infos}>
+      <DialogModal />
       <div className={styles.infos__container}>
         <h1 className={styles.infos__name}>{product.name}</h1>
         <h2 className={styles.infos__sku}>{product.sku}</h2>
@@ -158,7 +197,7 @@ export default function Infos({ product, setActiveImg }) {
             <BsHandbagFill />
             <b>THÊM VÀO GIỎ HÀNG</b>
           </button>
-          <button>
+          <button onClick={() => handleWishlist()}>
             <BsHeart />
             YÊU THÍCH
           </button>

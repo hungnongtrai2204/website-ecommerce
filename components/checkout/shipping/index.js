@@ -17,6 +17,7 @@ import { GiPhone } from "react-icons/gi";
 import { IoMdArrowDropupCircle } from "react-icons/io";
 import { AiOutlinePlus } from "react-icons/ai";
 import { IoIosRemoveCircleOutline } from "react-icons/io";
+import DotLoaderSpinner from "@/components/loaders/dotLoader";
 const initialValues = {
   firstName: "",
   lastName: "",
@@ -28,9 +29,10 @@ const initialValues = {
   address2: "",
   country: "",
 };
-export default function Shipping({ user, addresses, setAddresses }) {
+export default function Shipping({ user, addresses, setAddresses, profile }) {
   const [shipping, setShipping] = useState(initialValues);
   const [visible, setVisible] = useState(user?.address.length ? false : true);
+  const [loading, setLoading] = useState(false);
   const {
     firstName,
     lastName,
@@ -82,8 +84,10 @@ export default function Shipping({ user, addresses, setAddresses }) {
     setShipping({ ...shipping, [name]: value });
   };
   const saveShippingHandler = async () => {
+    setLoading(true);
     const res = await saveAddress(shipping);
-    setAddresses(res.addresses);
+    setAddresses([...res.addresses, shipping]);
+    setLoading(false);
   };
   const changeActiveHandler = async (id) => {
     const res = await changeActiveAddress(id);
@@ -96,9 +100,12 @@ export default function Shipping({ user, addresses, setAddresses }) {
   };
   return (
     <div className={styles.shipping}>
-      <div className={styles.header}>
-        <h3>Thông Tin Vận Chuyển</h3>
-      </div>
+      {loading && <DotLoaderSpinner loading={loading} />}
+      {!profile && (
+        <div className={styles.header}>
+          <h3>Thông Tin Vận Chuyển</h3>
+        </div>
+      )}
       <div className={styles.addresses}>
         {addresses.map((address) => (
           <div style={{ position: "relative" }}>
@@ -114,7 +121,7 @@ export default function Shipping({ user, addresses, setAddresses }) {
               onClick={() => changeActiveHandler(address._id)}
             >
               <div className={styles.address__side}>
-                <img src={user.image} alt="" />
+                <img src={profile ? user.user.image : user.image} alt="" />
               </div>
               <div className={styles.address__col}>
                 <span>
