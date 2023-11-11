@@ -7,7 +7,6 @@ export default async (req, res, next) => {
     secureCookie: process.env.NODE_ENV === "production",
   });
   if (token) {
-    //signed in
     req.user = token.sub;
     next();
   } else {
