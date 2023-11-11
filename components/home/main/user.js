@@ -23,7 +23,7 @@ export default function User() {
   return (
     <div className={styles.user}>
       <img
-        src="../../../images/userHeader.jpg"
+        src="../../../images/userheader.jpg"
         alt=""
         className={styles.user__header}
       />
@@ -91,7 +91,7 @@ export default function User() {
         </div>
       </div>
       <img
-        src="../../../images/userHeader.jpg"
+        src="../../../images/userheader.jpg"
         alt=""
         className={styles.user__footer}
       />
