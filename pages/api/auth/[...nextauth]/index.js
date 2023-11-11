@@ -13,6 +13,7 @@ import db from "../../../../utils/db";
 db.connectDB();
 export default NextAuth({
   adapter: MongoDBAdapter(clientPromise),
+  site: process.env.NEXTAUTH_URL,
   providers: [
     // OAuth authentication providers...
     CredentialsProvider({
