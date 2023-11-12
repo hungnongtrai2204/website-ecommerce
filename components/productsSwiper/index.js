@@ -43,30 +43,44 @@ export default function ProductsSwiper({ header, products, bg }) {
           },
         }}
       >
-        {products.map((product) => (
-          <SwiperSlide>
-            <div className={styles.product}>
-              <div className={styles.product__img}>
-                <img src={product.image} alt="" />
-              </div>
-              <div className={styles.product__infos}>
-                <h1>
-                  {product.name.length > 30
-                    ? `${product.name.slice(0, 30)}...`
-                    : product.name}
-                </h1>
-                {product.price && (
+        {products.map((product) => {
+          const prices = product.subProducts[0]?.sizes
+            .map((s) => s.price)
+            .sort((a, b) => a - b);
+          return (
+            <SwiperSlide>
+              <div className={styles.product}>
+                <div className={styles.product__img}>
+                  <img src={product.subProducts[0].images[0].url} alt="" />
+                </div>
+                <div className={styles.product__infos}>
+                  <h1>
+                    {product.name.length > 29
+                      ? `${product.name.slice(0, 29)}...`
+                      : product.name}
+                  </h1>
                   <span>
-                    {(+product.price).toLocaleString("it-IT", {
-                      style: "currency",
-                      currency: "VND",
-                    })}
+                    {prices.length === 1
+                      ? `${prices[0].toLocaleString("it-IT", {
+                          style: "currency",
+                          currency: "VND",
+                        })}`
+                      : `${prices[0].toLocaleString("it-IT", {
+                          style: "currency",
+                          currency: "VND",
+                        })} - ${prices[prices.length - 1].toLocaleString(
+                          "it-IT",
+                          {
+                            style: "currency",
+                            currency: "VND",
+                          }
+                        )}`}
                   </span>
-                )}
+                </div>
               </div>
-            </div>
-          </SwiperSlide>
-        ))}
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
     </div>
   );

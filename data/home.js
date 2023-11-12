@@ -47,7 +47,7 @@ export const offersArray = [
 export const menuArray = [
   {
     name: "Thời Trang Nữ",
-    link: "",
+    link: "/browse?category=62c46ff0062128444ad59193",
     subMenu: [
       {
         name: "",
@@ -59,7 +59,7 @@ export const menuArray = [
   },
   {
     name: "Thời Trang Nam",
-    link: "",
+    link: "/browse?category=62cfeb1e119f0cd432b478d6",
     subMenu: [
       {
         name: "",
@@ -71,7 +71,7 @@ export const menuArray = [
   },
   {
     name: "Thiết Bị Điện Tử",
-    link: "",
+    link: "/browse?category=65314327e4363e03eb9e88ac",
     subMenu: [
       {
         name: "",
@@ -193,8 +193,8 @@ export const menuArray = [
     images: [],
   },
   {
-    name: "Điện Thoại & Viễn Thông",
-    link: "",
+    name: "Điện Thoại & Phụ Kiện",
+    link: "/browse?category=653142d7e4363e03eb9e88a4",
     subMenu: [
       {
         name: "",

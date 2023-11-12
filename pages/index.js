@@ -20,10 +20,11 @@ import db from "@/utils/db";
 import Product from "@/models/Product";
 import ProductCard from "@/components/productCard";
 
-export default function Home({ country, products }) {
+export default function Home({ country, products, productMenFashion }) {
   const { data: session } = useSession();
   const isMedium = useMediaQuery({ query: "(max-width: 850px)" });
   const isMobile = useMediaQuery({ query: "(max-width: 550px)" });
+  console.log(productMenFashion);
   return (
     <>
       <Header country={country} />
@@ -58,9 +59,9 @@ export default function Home({ country, products }) {
             />
           </div>
           <ProductsSwiper
-            products={women_swiper}
-            header="Thời Trang Nữ"
-            bg="#F2BED1"
+            products={productMenFashion}
+            header="Thời Trang Nam"
+            bg="#2f82ff"
           />
           {/* <ProductsSwiper
             products={gamingSwiper}
@@ -72,11 +73,11 @@ export default function Home({ country, products }) {
             header="Cải Tạo Nhà"
             bg="#5a31f4"
           /> */}
-          <div className={styles.products}>
+          {/* <div className={styles.products}>
             {products.map((product) => (
               <ProductCard product={product} key={product._id} />
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
       <Footer country={country} />
@@ -87,7 +88,9 @@ export default function Home({ country, products }) {
 export const getServerSideProps = async () => {
   db.connectDB();
   let products = await Product.find().sort({ createdAt: -1 }).lean();
-
+  let productMenFashion = await Product.find({
+    category: "62cfeb1e119f0cd432b478d6",
+  });
   let data = await axios
     .get("https://api.ipregistry.co/?key=s6nqi028kbnmc39f")
     .then((response) => response.data.location.country)
@@ -102,6 +105,7 @@ export const getServerSideProps = async () => {
         flag: data.flag.emojitwo,
       },
       products: JSON.parse(JSON.stringify(products)),
+      productMenFashion: JSON.parse(JSON.stringify(productMenFashion)),
     },
   };
 };
