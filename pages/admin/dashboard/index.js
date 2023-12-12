@@ -178,9 +178,10 @@ export default function Dashboard({ users, orders, products }) {
 }
 
 export async function getServerSideProps({ req }) {
-  const users = await User.find().lean();
+  const users = await User.find().sort({ createdAt: -1 }).lean();
   const orders = await Order.find()
     .populate({ path: "user", model: User })
+    .sort({ createdAt: -1 })
     .lean();
   const products = await Product.find().lean();
   return {

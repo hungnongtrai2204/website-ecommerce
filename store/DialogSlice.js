@@ -1,18 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  show: true,
-  header: "Lỗi tạo sản phẩm",
-  msgs: [
-    {
-      msg: "Chọn ít nhất 2 hình ảnh.",
-      type: "error",
-    },
-    {
-      msg: "Chọn ít nhất 2 hình ảnh.",
-      type: "success",
-    },
-  ],
+  show: false,
+  header: "",
+  msgs: [],
   link: {
     link: "",
     link_text: "",

@@ -32,37 +32,38 @@ export default function Home({ country, products, productMenFashion }) {
         <div className={styles.container}>
           <Main />
           <FlashDeals />
+
+          <ProductsSwiper
+            products={productMenFashion}
+            header="Thời Trang Nam"
+            bg="#2f82ff"
+          />
           <div className={styles.home__category}>
             <Category
               header="Váy Đầm"
               products={women_dresses}
-              background="#5a31f4"
+              background="#2f82ff"
             />
             {!isMedium && (
               <Category
                 header="Giày / Giày Cao Gót"
                 products={women_shoes}
-                background="#3c811f"
+                background="#2f82ff"
               />
             )}
             {isMobile && (
               <Category
                 header="Giày / Giày Cao Gót"
                 products={women_shoes}
-                background="#3c811f"
+                background="#2f82ff"
               />
             )}
             <Category
               header="Phụ Kiện"
               products={women_accessories}
-              background="#000"
+              background="#2f82ff"
             />
           </div>
-          <ProductsSwiper
-            products={productMenFashion}
-            header="Thời Trang Nam"
-            bg="#2f82ff"
-          />
           {/* <ProductsSwiper
             products={gamingSwiper}
             header="Dành Cho Game Thủ"

@@ -31,7 +31,7 @@ export default function User() {
         {session ? (
           <div className={styles.user__infos}>
             <img src={session.user?.image} alt="" />
-            <h4>{session.user.name}</h4>
+            <h4 className="font-bold">{session.user.name}</h4>
           </div>
         ) : (
           <div className={styles.user__infos}>

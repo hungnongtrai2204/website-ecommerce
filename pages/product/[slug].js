@@ -25,7 +25,7 @@ export default function product({ product, country }) {
           <div className={styles.path}>
             Trang Chủ / {product.category.name}
             {product.subCategories.map((sub) => (
-              <span>{sub.name}</span>
+              <span> / {sub.name}</span>
             ))}
           </div>
           <div className={styles.product__main}>
@@ -77,23 +77,14 @@ export async function getServerSideProps(context) {
     sku: subProduct.sku,
     colors: product.subProducts.map((p) => p.color),
     priceRange: subProduct.discount
-      ? `Từ ${(
-          prices[0] -
-          (prices[0] * subProduct.discount) / 100
-        ).toLocaleString("it-IT", {
-          style: "currency",
-          currency: "VND",
-        })} đến ${(
-          prices[prices.length - 1] -
-          (prices[prices.length - 1] * subProduct.discount) / 100
-        ).toLocaleString("it-IT", {
-          style: "currency",
-          currency: "VND",
-        })}`
-      : `Từ ${prices[0].toLocaleString("it-IT", {
-          style: "currency",
-          currency: "VND",
-        })} đến ${prices[prices.length - 1].toLocaleString("it-IT", {
+      ? `${(prices[0] - (prices[0] * subProduct.discount) / 100).toLocaleString(
+          "it-IT",
+          {
+            style: "currency",
+            currency: "VND",
+          }
+        )}`
+      : `${prices[0].toLocaleString("it-IT", {
           style: "currency",
           currency: "VND",
         })}`,

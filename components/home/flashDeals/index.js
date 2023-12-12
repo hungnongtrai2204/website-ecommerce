@@ -17,7 +17,7 @@ export default function FlashDeals() {
   return (
     <div className={styles.flashDeals}>
       <div className={styles.flashDeals__header}>
-        <h1>
+        <h1 className="text-5xl flex flex-row	">
           FLASH SALE
           <MdFlashOn />
         </h1>

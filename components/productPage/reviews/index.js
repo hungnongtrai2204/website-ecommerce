@@ -23,7 +23,7 @@ export default function Reviews({ product }) {
                 readOnly
                 style={{ color: "#FACF19" }}
               />
-              {product.rating == 0 ? "Chưa có đánh giá nào." : product.rating}
+              {product.rating == 0 ? "Chưa có đánh giá." : product.rating}
             </div>
           </div>
           <div className={styles.reviews__stats_reviews}>
@@ -43,7 +43,12 @@ export default function Reviews({ product }) {
                     }}
                   ></div>
                 </div>
-                <span>{rating.percentage}%</span>
+                <span>
+                  {rating.percentage && isNaN(rating.percentage)
+                    ? 0
+                    : rating.percentage}
+                  %
+                </span>
               </div>
             ))}
           </div>

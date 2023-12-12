@@ -77,7 +77,7 @@ export default function Cart() {
         ) : (
           <Empty />
         )}
-        <ProductsSwiper products={women_swiper} />
+        {/* <ProductsSwiper products={women_swiper} /> */}
       </div>
     </>
   );
