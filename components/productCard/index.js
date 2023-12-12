@@ -44,7 +44,10 @@ export default function ProductCard({ product }) {
           </h1>
           <span>
             {prices.length === 1
-              ? `${prices[0]}đ`
+              ? `${prices[0].toLocaleString("it-IT", {
+                  style: "currency",
+                  currency: "VND",
+                })}`
               : `${prices[0].toLocaleString("it-IT", {
                   style: "currency",
                   currency: "VND",

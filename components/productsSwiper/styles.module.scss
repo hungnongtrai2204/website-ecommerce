@@ -1,6 +1,7 @@
 .wrapper {
-  margin-top: 1rem;
-  .header{
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  .header {
     height: 50px;
     background: $yellow-color;
     color: #fff;
@@ -32,6 +33,7 @@
       }
       span {
         color: $redish-color;
+        font-size: 16px;
       }
     }
   }

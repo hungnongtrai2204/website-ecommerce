@@ -39,7 +39,7 @@ export default function Main({ searchHandler }) {
         </form>
         <Link href="/cart" className={styles.cart}>
           <FaOpencart />
-          <span>0</span>
+          <span>{cart.cartItems.length}</span>
         </Link>
       </div>
     </div>

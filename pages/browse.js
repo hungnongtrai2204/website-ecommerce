@@ -197,7 +197,7 @@ export default function browse({
           <div className={styles.browse__path}>Trang Chủ / Duyệt Qua</div>
           <div className={styles.browse__tags}>
             {categories.map((c) => (
-              <Link href="" key={c._id}>
+              <Link href={`/browse?category=${c._id}`} key={c._id}>
                 {c.name}
               </Link>
             ))}

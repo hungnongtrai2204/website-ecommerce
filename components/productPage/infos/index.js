@@ -14,6 +14,7 @@ import { addToCart, updateCart } from "@/store/cartSlice";
 import { signIn, useSession } from "next-auth/react";
 import { showDialog } from "@/store/DialogSlice";
 import DialogModal from "@/components/dialogModal";
+import { toast } from "react-toastify";
 
 export default function Infos({ product, setActiveImg }) {
   const router = useRouter();
@@ -68,6 +69,7 @@ export default function Infos({ product, setActiveImg }) {
           })
         );
       }
+      toast.success(`Thêm ${qty} ${data.name} thành công.`);
     }
   };
   const handleWishlist = async () => {
