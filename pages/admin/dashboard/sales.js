@@ -27,8 +27,10 @@ export default function sales({
   totalOrderRefundOfMonth,
   percentOrderRefund,
   totalOrder,
+  realTotalOrder,
 }) {
   console.log(orders);
+  const getTotalOrderOfMonth = (month) => {};
   const earningData = [
     {
       icon: <MdOutlineSupervisorAccount />,
@@ -67,6 +69,20 @@ export default function sales({
       iconBg: "rgb(235, 250, 242)",
       pcColor: "red-600",
     },
+  ];
+  const SparklineAreaData = [
+    { x: 1, yval: 2 },
+    { x: 2, yval: 6 },
+    { x: 3, yval: 8 },
+    { x: 4, yval: 5 },
+    { x: 5, yval: 10 },
+    { x: 6, yval: 10 },
+    { x: 7, yval: 10 },
+    { x: 8, yval: 10 },
+    { x: 9, yval: 10 },
+    { x: 10, yval: 10 },
+    { x: 11, yval: 10 },
+    { x: 12, yval: 10 },
   ];
   return (
     <Layout>
@@ -157,16 +173,21 @@ export default function sales({
                         })}
                       </span>
                       <span className="p-1.5 hover:drop-shadow-xl cursor-pointer rounded-full text-white bg-green-400 ml-3 text-xs">
-                        23%
+                        {((realTotalOrder / totalOrder) * 100).toFixed(0)}%
                       </span>
                     </p>
-                    <p className="text-gray-500 mt-1">Ngân Sách</p>
+                    <p className="text-gray-500 mt-1">Tổng Doanh Thu</p>
                   </div>
                   <div className="mt-8">
                     <p>
-                      <span className="text-3xl font-semibold">$48,438</span>
+                      <span className="text-3xl font-semibold">
+                        {realTotalOrder.toLocaleString("it-IT", {
+                          style: "currency",
+                          currency: "VND",
+                        })}
+                      </span>
                     </p>
-                    <p className="text-gray-500 mt-1">Chi Tiêu</p>
+                    <p className="text-gray-500 mt-1">Thực Nhận</p>
                   </div>
                   <div className="mt-5">
                     <SparkLine
@@ -216,8 +237,14 @@ export const getServerSideProps = async () => {
   let totalOrderRefundOfMonth = 0;
   let totalOrderRefundOfPreMonth = 0;
   let totalOrder = 0;
+  let realTotalOrder = 0;
   for (const order of orders) {
-    totalOrder += order.total;
+    if (order.status != "Đã Hủy") {
+      totalOrder += order.total;
+      if (order.isPaid === true) {
+        realTotalOrder += order.total;
+      }
+    }
     if (new Date(order.createdAt).getMonth() === today.getMonth()) {
       totalOfMonth += order.total;
       totalOrderOfMonth += 1;
@@ -282,6 +309,7 @@ export const getServerSideProps = async () => {
         ? 0
         : percentOrderRefund.toFixed(0),
       totalOrder,
+      realTotalOrder,
     },
   };
 };
