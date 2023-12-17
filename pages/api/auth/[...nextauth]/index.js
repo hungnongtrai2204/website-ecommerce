@@ -83,6 +83,11 @@ const SignInUser = async ({ password, user }) => {
   if (!password) {
     throw new Error("Vui lòng nhập mật khẩu của bạn.");
   }
+  if (user.emailVerified === false) {
+    throw new Error(
+      "Vui lòng xác thực tài khoản của bạn qua hộp thư email mà bạn đã đăng ký"
+    );
+  }
   const testPassword = await bcrypt.compare(password, user.password);
   if (!testPassword) {
     throw new Error("Mật khẩu sai");

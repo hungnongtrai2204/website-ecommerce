@@ -59,10 +59,10 @@ export const sidebarData = [
         filter: "Chưa Được Xử Lý",
       },
       {
-        name: "Đã Gửi",
+        name: "Đang Vận Chuyển",
         value: "Dispatched Orders",
         link: "/profile/orders",
-        filter: "Đã Gửi",
+        filter: "Đang Vận Chuyển",
       },
       {
         name: "Đã Giao",
@@ -176,9 +176,9 @@ export const ordersLinks = [
     filter: "Chưa Được Xử Lý",
   },
   {
-    name: "Đã Gửi",
+    name: "Đang Vận Chuyển",
     value: "Dispatched Orders",
-    filter: "Đã Gửi",
+    filter: "Đang Vận Chuyển",
   },
   {
     name: "Đã Giao",

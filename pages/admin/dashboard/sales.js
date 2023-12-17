@@ -5,6 +5,7 @@ import Line from "@/components/chart/Line";
 import SparkLine from "@/components/chart/SparkLine";
 import Stacked from "@/components/chart/Stacked";
 import { SparklineAreaData } from "@/data/dummy";
+import Category from "@/models/Category";
 import Order from "@/models/Order";
 import Product from "@/models/Product";
 import User from "@/models/User";
@@ -28,9 +29,18 @@ export default function sales({
   percentOrderRefund,
   totalOrder,
   realTotalOrder,
+  listCategories,
+  total,
 }) {
-  console.log(orders);
-  const getTotalOrderOfMonth = (month) => {};
+  const getTotalOrderOfMonth = (month) => {
+    let total = 0;
+    for (const order of orders) {
+      if (new Date(order.createdAt).getMonth() + 1 == month) {
+        total += order.total;
+      }
+    }
+    return total;
+  };
   const earningData = [
     {
       icon: <MdOutlineSupervisorAccount />,
@@ -71,19 +81,20 @@ export default function sales({
     },
   ];
   const SparklineAreaData = [
-    { x: 1, yval: 2 },
-    { x: 2, yval: 6 },
-    { x: 3, yval: 8 },
-    { x: 4, yval: 5 },
-    { x: 5, yval: 10 },
-    { x: 6, yval: 10 },
-    { x: 7, yval: 10 },
-    { x: 8, yval: 10 },
-    { x: 9, yval: 10 },
-    { x: 10, yval: 10 },
-    { x: 11, yval: 10 },
-    { x: 12, yval: 10 },
+    { x: 1, yval: getTotalOrderOfMonth(1) },
+    { x: 2, yval: getTotalOrderOfMonth(2) },
+    { x: 3, yval: getTotalOrderOfMonth(3) },
+    { x: 4, yval: getTotalOrderOfMonth(4) },
+    { x: 5, yval: getTotalOrderOfMonth(5) },
+    { x: 6, yval: getTotalOrderOfMonth(6) },
+    { x: 7, yval: getTotalOrderOfMonth(7) },
+    { x: 8, yval: getTotalOrderOfMonth(8) },
+    { x: 9, yval: getTotalOrderOfMonth(9) },
+    { x: 10, yval: getTotalOrderOfMonth(10) },
+    { x: 11, yval: getTotalOrderOfMonth(11) },
+    { x: 12, yval: getTotalOrderOfMonth(12) },
   ];
+  console.log(orders);
   return (
     <Layout>
       <div className="bg-main-bg">
@@ -144,7 +155,7 @@ export default function sales({
             </div>
           </div>
           <div className="flex gap-10 flex-wrap justify-center">
-            <div className="bg-white m-3 p-4 rounded-2xl md:w-780">
+            <div className="bg-white m-3 p-4 rounded-2xl md:w-900">
               <div className="flex justify-between">
                 <p className="font-semibold text-xl">Cập Nhật Doanh Thu</p>
                 <div className="flex items-center gap-4">
@@ -210,15 +221,15 @@ export default function sales({
                   </div>
                 </div>
                 <div>
-                  <Stacked width="320px" height="360px" />
+                  <Stacked width="650px" height="360px" orders={orders} />
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div className="mt-12">
-          <Line />
-          <Area />
+          <Line listCategories={listCategories} orders={orders} total={total} />
+          {/* <Area /> */}
         </div>
       </div>
     </Layout>
@@ -227,7 +238,16 @@ export default function sales({
 
 export const getServerSideProps = async () => {
   db.connectDB();
-  let orders = await Order.find().lean();
+  let orders = await Order.find()
+    .populate({
+      path: "products",
+      populate: {
+        path: "product", // assuming 'product' is a reference to another schema
+      },
+    })
+    .lean();
+  console.log(orders.products);
+
   let users = await User.find().lean();
   let products = await Product.find().lean();
   const today = new Date();
@@ -294,6 +314,57 @@ export const getServerSideProps = async () => {
   const percentProduct =
     (totalProductOfMonth / totalProductOfPreMonth) * 100 - 100;
 
+  //Chart
+  const categories = await Category.find().lean();
+
+  const listCategories = categories.map((category) => {
+    return {
+      category,
+      qty: 0,
+      month: [
+        { x: "Tháng 1", y: 0 },
+        { x: "Tháng 2", y: 0 },
+        { x: "Tháng 3", y: 0 },
+        { x: "Tháng 4", y: 0 },
+        { x: "Tháng 5", y: 0 },
+        { x: "Tháng 6", y: 0 },
+        { x: "Tháng 7", y: 0 },
+        { x: "Tháng 8", y: 0 },
+        { x: "Tháng 9", y: 0 },
+        { x: "Tháng 10", y: 0 },
+        { x: "Tháng 11", y: 0 },
+        { x: "Tháng 12", y: 0 },
+      ],
+    };
+  });
+
+  const addTotalOfCategory = (id, qty, month) => {
+    for (const category of listCategories) {
+      if (category.category._id.toString() === id.toString()) {
+        category.qty += qty;
+        category.month[month].y += qty;
+      }
+    }
+  };
+  let total = 0;
+  const percentOfCatogories = () => {
+    let count = 0;
+    for (const order of orders) {
+      for (const product of order.products) {
+        total += product.qty;
+        // console.log(product);
+        addTotalOfCategory(
+          product.product.category,
+          product.qty,
+          order.createdAt.getMonth()
+        );
+      }
+      count++;
+    }
+  };
+
+  percentOfCatogories();
+
   return {
     props: {
       orders: JSON.parse(JSON.stringify(orders)),
@@ -310,6 +381,8 @@ export const getServerSideProps = async () => {
         : percentOrderRefund.toFixed(0),
       totalOrder,
       realTotalOrder,
+      listCategories: JSON.parse(JSON.stringify(listCategories)),
+      total,
     },
   };
 };

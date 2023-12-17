@@ -6,8 +6,16 @@ import User from "../../models/User";
 import { IoIosArrowForward } from "react-icons/io";
 import db from "@/utils/db";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import StripePayment from "@/components/stripePayment";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import { toast } from "react-toastify";
+
 function reducer(state, action) {
   switch (action.type) {
     case "PAY_REQUEST":
@@ -27,11 +35,30 @@ export default function order({
   stripe_public_key,
 }) {
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
+  const [status, setStatus] = useState(orderData.status);
   const [{ loading, error, success }, dispatch] = useReducer(reducer, {
     loading: true,
     order: {},
     error: "",
   });
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const cancelOrderHandler = async () => {
+    try {
+      const res = await axios.put(`/api/order/${orderData._id}/changeStatus`, {
+        status: "Đã Hủy",
+      });
+    } catch (error) {}
+    setOpen(false);
+    setStatus("Đã Hủy");
+    toast.success(`Đơn hàng ${orderData._id} đã hủy thành công.`);
+  };
   useEffect(() => {
     if (!orderData._id || success) {
       if (success) {
@@ -88,6 +115,25 @@ export default function order({
   }
   return (
     <>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Hủy Đơn Hàng"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Bạn có đồng ý hủy đơn hàng ${orderData._id}?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Từ Chối</Button>
+          <Button onClick={cancelOrderHandler} autoFocus>
+            Đồng Ý
+          </Button>
+        </DialogActions>
+      </Dialog>
       <Header country={country} />
       <div className={styles.order}>
         <div className={styles.container}>
@@ -109,20 +155,20 @@ export default function order({
                 Tình Trạng Đơn Hàng:{" "}
                 <span
                   className={
-                    orderData.status == "Chưa Được Xử Lý"
+                    status == "Chưa Được Xử Lý"
                       ? styles.not_processed
-                      : orderData.status == "Đang Xử Lý"
+                      : status == "Đang Xử Lý"
                       ? styles.processing
-                      : orderData.status == "Đã Gửi"
+                      : status == "Đang Vận Chuyển"
                       ? styles.dispatched
-                      : orderData.status == "Đã Hủy"
+                      : status == "Đã Hủy"
                       ? styles.cancelled
-                      : orderData.status == "Đã Hoàn Thành"
+                      : status == "Đã Hoàn Thành"
                       ? styles.completed
                       : ""
                   }
                 >
-                  {orderData.status}
+                  {status}
                 </span>
               </div>
             </div>
@@ -276,6 +322,19 @@ export default function order({
                 <span>{orderData.shippingAddress.zipCode}</span>
                 <span>{orderData.shippingAddress.country}</span>
               </div>
+              {(status === "Chưa Được Xử Lý" || status === "Đang Xử Lý") && (
+                <div className={styles.order__address_shipping}>
+                  <h2>Hủy Đơn Hàng</h2>
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    fullWidth
+                    onClick={handleClickOpen}
+                  >
+                    Hủy
+                  </Button>
+                </div>
+              )}
             </div>
             {!orderData.isPaid && (
               <div className={styles.order__payment}>

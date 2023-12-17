@@ -126,7 +126,7 @@ export default function Dashboard({ users, orders, products }) {
                             ? styles.not_processed
                             : order.status == "Đang Xử Lý"
                             ? styles.processing
-                            : order.status == "Đã Gửi"
+                            : order.status == "Đang Vận Chuyển"
                             ? styles.dispatched
                             : order.status == "Đã Hủy"
                             ? styles.cancelled

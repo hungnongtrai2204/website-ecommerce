@@ -103,7 +103,7 @@ const orderSchema = new mongoose.Schema(
       enum: [
         "Chưa Được Xử Lý",
         "Đang Xử Lý",
-        "Đã Gửi",
+        "Đang Vận Chuyển",
         "Đã Hủy",
         "Đã Hoàn Thành",
       ],
