@@ -95,7 +95,7 @@ export default function signin({ country, providers, callbackUrl, csrfToken }) {
           email: email,
           password: password,
         };
-        const res = await signIn("credentials", options);
+        // const res = await signIn("credentials", options);
         // Router.push("/");
         router.push("/");
       }, 2000);

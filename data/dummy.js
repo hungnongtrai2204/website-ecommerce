@@ -394,7 +394,10 @@ export const FinancialPrimaryYAxis = {
 };
 
 export const LinePrimaryXAxis = {
-  valueType: "DateTime",
+  // valueType: "Category",
+  // majorGridLines: { width: 0 },
+  // title: "Months",
+  valueType: "Category",
   labelFormat: "y",
   intervalType: "Years",
   edgeLabelPlacement: "Shift",
@@ -403,11 +406,11 @@ export const LinePrimaryXAxis = {
 };
 
 export const LinePrimaryYAxis = {
-  labelFormat: "{value}%",
+  labelFormat: "{value}",
   rangePadding: "None",
   minimum: 0,
   maximum: 100,
-  interval: 20,
+  interval: 10,
   lineStyle: { width: 0 },
   majorTickLines: { width: 0 },
   minorTickLines: { width: 0 },
@@ -3080,9 +3083,9 @@ export const stackedPrimaryXAxis = {
 
 export const stackedPrimaryYAxis = {
   lineStyle: { width: 0 },
-  minimum: 100,
-  maximum: 400,
-  interval: 100,
+  minimum: 0,
+  maximum: 900000000,
+  interval: 80000000,
   majorTickLines: { width: 0 },
   majorGridLines: { width: 1 },
   minorGridLines: { width: 1 },

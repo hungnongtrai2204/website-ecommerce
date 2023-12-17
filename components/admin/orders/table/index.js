@@ -14,10 +14,19 @@ import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import styles from "./styles.module.scss";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import Button from "@mui/material/Button";
 
 function Row(props) {
-  const { row } = props;
+  const { row, onChangeStatus } = props;
   const [open, setOpen] = React.useState(false);
+  const [status, setStatus] = React.useState(row.status);
+  const changeStatusHandler = (event) => {
+    setStatus(event.target.value);
+  };
 
   return (
     <React.Fragment>
@@ -43,36 +52,40 @@ function Row(props) {
         </TableCell>
         <TableCell align="right">
           {row.isPaid ? (
-            <img
-              src="../../../images/verified.png"
-              alt=""
-              className={styles.ver}
-            />
+            <div className="flex justify-center items-center ml-10">
+              <img
+                src="../../../images/verified.png"
+                alt=""
+                className={styles.ver}
+              />
+            </div>
           ) : (
-            <img
-              src="../../../images/unverified.png"
-              alt=""
-              className={styles.ver}
-            />
+            <div className="flex justify-center items-center ml-10">
+              <img
+                src="../../../images/unverified.png"
+                alt=""
+                className={styles.ver}
+              />
+            </div>
           )}
         </TableCell>
         <TableCell align="right">
           <span
             className={
-              row.status == "Chưa Được Xử Lý"
+              status == "Chưa Được Xử Lý"
                 ? styles.not_processed
-                : row.status == "Đang Xử Lý"
+                : status == "Đang Xử Lý"
                 ? styles.processing
-                : row.status == "Đã Gửi"
+                : status == "Đang Vận Chuyển"
                 ? styles.dispatched
-                : row.status == "Đã Hủy"
+                : status == "Đã Hủy"
                 ? styles.cancelled
-                : row.status == "Đã Hoàn Thành"
+                : status == "Đã Hoàn Thành"
                 ? styles.completed
                 : ""
             }
           >
-            {row.status}
+            {status}
           </span>
         </TableCell>
         <TableCell align="right">{row.couponApplied || "-"}</TableCell>
@@ -126,6 +139,44 @@ function Row(props) {
                   </TableRow>
                 </TableBody>
               </Table>
+            </Box>
+          </Collapse>
+        </TableCell>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={1}>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <Box sx={{ margin: 1 }}>
+              <Typography variant="h6" gutterBottom component="div">
+                Trạng Thái Đơn Hàng
+              </Typography>
+            </Box>
+            <Box sx={{ margin: 1 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">
+                  Trạng Thái
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={status}
+                  label="Trạng Thái"
+                  onChange={changeStatusHandler}
+                >
+                  <MenuItem value="Chưa Được Xử Lý">Chưa Được Xử Lý</MenuItem>
+                  <MenuItem value="Đang Xử Lý">Đang Xử Lý</MenuItem>
+                  <MenuItem value="Đang Vận Chuyển">Đang Vận Chuyển</MenuItem>
+                  <MenuItem value="Đã Hủy">Đã Hủy</MenuItem>
+                  <MenuItem value="Đã Hoàn Thành">Đã Hoàn Thành</MenuItem>
+                </Select>
+                <div className="mt-5"></div>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    onChangeStatus(row._id, status);
+                  }}
+                >
+                  Xác Nhận
+                </Button>
+              </FormControl>
             </Box>
           </Collapse>
         </TableCell>
@@ -215,7 +266,7 @@ Row.propTypes = {
   }).isRequired,
 };
 
-export default function CollapsibleTable({ rows }) {
+export default function CollapsibleTable({ rows, onChangeStatus }) {
   return (
     <TableContainer component={Paper}>
       <Typography
@@ -241,7 +292,7 @@ export default function CollapsibleTable({ rows }) {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <Row key={row.name} row={row} />
+            <Row key={row.name} row={row} onChangeStatus={onChangeStatus} />
           ))}
         </TableBody>
       </Table>
