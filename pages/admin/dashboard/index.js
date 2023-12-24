@@ -12,8 +12,14 @@ import { SlHandbag, SlEye } from "react-icons/sl";
 import { SiProducthunt } from "react-icons/si";
 import { GiTakeMyMoney } from "react-icons/gi";
 import Link from "next/link";
+import { io } from "socket.io-client";
+import { useEffect } from "react";
 export default function Dashboard({ users, orders, products }) {
   const { data: session } = useSession();
+  useEffect(() => {
+    const socket = io("http://localhost:5000");
+    console.log(socket);
+  }, []);
   return (
     <div>
       <Head>

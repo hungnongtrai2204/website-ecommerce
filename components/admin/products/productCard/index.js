@@ -10,7 +10,7 @@ import { RiDeleteBin2Line } from "react-icons/ri";
 export default function ProductCard({ product }) {
   return (
     <div className={styles.product}>
-      <h1 className={styles.product__name}>{product.name}</h1>
+      <h1 className={`${styles.product__name} font-bold`}>{product.name}</h1>
       <h2 className={styles.product__category}>#{product.category.name}</h2>
       <Swiper
         slidesPerView={1}
@@ -44,7 +44,9 @@ export default function ProductCard({ product }) {
                 <img src={p.images[0].url} alt="" />
               </div>
               <div className={styles.product__actions}>
-                <Link href={`/admin/dashboard/product/${product._id}`}>
+                <Link
+                  href={`/admin/dashboard/product/${product._id}?style=${i}`}
+                >
                   <TbEdit />
                 </Link>
                 <Link href={`/product/${product.slug}?style=${i}`}>

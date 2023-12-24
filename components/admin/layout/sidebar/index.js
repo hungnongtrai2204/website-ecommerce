@@ -81,7 +81,7 @@ export default function Sidebar() {
             </Link>
           </li>
           <li className={route == "messages" ? styles.active : ""}>
-            <Link href="/admin/dashboard/messages">
+            <Link href="https://dashboard.kommunicate.io/conversations">
               <AiFillMessage />
               <span className={styles.show}>Tin Nhắn</span>
             </Link>
