@@ -8,6 +8,7 @@ export default function SingularSelect({
   placeholder,
   header,
   disabled,
+  value,
   ...rest
 }) {
   const [field, meta] = useField(rest);
@@ -34,6 +35,7 @@ export default function SingularSelect({
         label={placeholder}
         disabled={disabled}
         value={field.value}
+        defaultValue={value}
         onChange={handleChange}
         className={`${styles.select} ${
           meta.touched && meta.error && styles.error__select

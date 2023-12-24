@@ -129,13 +129,13 @@ export default function Images({
                 <div className={styles.blur}></div>
                 <img src={img} alt="" />
                 <div className={styles.images__main_grid_actions}>
-                  <button onClick={() => handleRemove(img)}>
+                  <button type="button" onClick={() => handleRemove(img)}>
                     <RiDeleteBin7Fill />
                   </button>
-                  <button onClick={() => setColorImage(img)}>
+                  <button type="button" onClick={() => setColorImage(img)}>
                     <GiExtractionOrb />
                   </button>
-                  <button>
+                  <button type="button">
                     <RiShape2Line />
                   </button>
                 </div>
