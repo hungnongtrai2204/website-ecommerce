@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
           Kommunicate.default &&
           typeof Kommunicate.default.init === "function"
         ) {
-          Kommunicate.default.init("39057f680d378c35c27d241e7f183d27a", {
+          Kommunicate.default.init("3acddaa0c0f1e7dc4e165942616fd10bd", {
             automaticChatOpenOnNavigation: true,
             popupWidget: true,
           });

@@ -105,6 +105,10 @@ const productSchema = new mongoose.Schema(
           type: Number,
           default: 0,
         },
+        isDisabled: {
+          type: Boolean,
+          default: false,
+        },
       },
     ],
   },

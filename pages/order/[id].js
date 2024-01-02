@@ -15,6 +15,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { toast } from "react-toastify";
+import Link from "next/link";
+import Product from "@/models/Product";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -113,6 +115,7 @@ export default function order({
   function onErrorHandler(error) {
     console.log(error);
   }
+  console.log(orderData);
   return (
     <>
       <Dialog
@@ -180,7 +183,7 @@ export default function order({
                   </div>
                   <div className={styles.product__infos}>
                     <h1 className={styles.product__infos_name}>
-                      {product.name.length > 30
+                      {product.name?.length > 30
                         ? `${product.name.substring(0, 30)}...`
                         : product.name}
                     </h1>
@@ -193,6 +196,20 @@ export default function order({
                         currency: "VND",
                       })}{" "}
                       x {product.qty}
+                    </div>
+                    <div className={styles.product__infos_priceQty}>
+                      {product.isReview === false &&
+                      status === "Đã Hoàn Thành" ? (
+                        <Link
+                          href={`/product/${product.product.slug}?style=${0}`}
+                        >
+                          <Button variant="outlined" color="success">
+                            ĐÁNH GIÁ SẢN PHẨM
+                          </Button>
+                        </Link>
+                      ) : (
+                        ""
+                      )}
                     </div>
                     <div className={styles.product__infos_total}>
                       {(product.price * product.qty).toLocaleString("it-IT", {
@@ -376,14 +393,19 @@ export const getServerSideProps = async (context) => {
   const id = query.id;
   const order = await Order.findById(id)
     .populate({ path: "user", model: User })
+    .populate({
+      path: "products.product",
+      model: Product,
+    })
     .lean();
+
   let paypal_client_id = process.env.PAYPAL_CLIENT_ID;
   let stripe_public_key = process.env.STRIPE_PUBLIC_KEY;
   let data = await axios
     .get("https://api.ipregistry.co/?key=s6nqi028kbnmc39f")
     .then((response) => response.data.location.country)
     .catch((error) => {
-      console.log(error);
+      console.log("Error", error);
     });
   db.disconnectDB();
   return {

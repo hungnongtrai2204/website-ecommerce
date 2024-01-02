@@ -294,7 +294,7 @@ export async function getServerSideProps(ctx) {
   const shippingQuery = query.shipping || 0;
   const ratingQuery = query.rating || "";
   const sortQuery = query.sort || "";
-  const pageSize = 10;
+  const pageSize = 12;
   const page = query.page || 1;
 
   //---------------
@@ -449,6 +449,7 @@ export async function getServerSideProps(ctx) {
   db.connectDB();
 
   let productDb = await Product.find({
+    "subProducts.isDisabled": false,
     ...search,
     ...category,
     ...brand,
@@ -468,6 +469,7 @@ export async function getServerSideProps(ctx) {
     .lean();
   let products =
     sortQuery && sortQuery !== "" ? productDb : randomize(productDb);
+
   let categories = await Category.find().lean();
   let subCategories = await SubCategory.find()
     .populate({

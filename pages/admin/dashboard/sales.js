@@ -2,6 +2,7 @@ import Layout from "@/components/admin/layout";
 import Button from "@/components/buttons/button";
 import Area from "@/components/chart/Area";
 import Line from "@/components/chart/Line";
+import LineChart from "@/components/chart/LineChart";
 import SparkLine from "@/components/chart/SparkLine";
 import Stacked from "@/components/chart/Stacked";
 import { SparklineAreaData } from "@/data/dummy";
@@ -113,13 +114,13 @@ export default function sales({
                 </div>
               </div>
               <div className="mt-6">
-                <Button
+                {/* <Button
                   color="white"
                   bgColor="#2f82ff"
                   text="Tải Xuống"
                   borderRadius="10px"
                   size="md"
-                />
+                /> */}
               </div>
             </div>
             <div className="flex m-3 flex-wrap justify-center gap-1 items-center">
@@ -201,7 +202,7 @@ export default function sales({
                     <p className="text-gray-500 mt-1">Thực Nhận</p>
                   </div>
                   <div className="mt-5">
-                    <SparkLine
+                    {/* <SparkLine
                       currentColor="#2f82ff"
                       id="line-sparkline"
                       type="Line"
@@ -209,19 +210,19 @@ export default function sales({
                       width="250px"
                       data={SparklineAreaData}
                       color="#2f82ff"
-                    />
+                    /> */}
                   </div>
                   <div className="mt-10">
-                    <Button
+                    {/* <Button
                       color="white"
                       bgColor="#2f82ff"
                       text="Tải Xuống Báo Cáo"
                       borderRadius="10px"
-                    />
+                    /> */}
                   </div>
                 </div>
                 <div>
-                  <Stacked width="650px" height="360px" orders={orders} />
+                  <LineChart />
                 </div>
               </div>
             </div>

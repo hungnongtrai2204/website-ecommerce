@@ -11,9 +11,12 @@ import { useState } from "react";
 import Infos from "@/components/productPage/infos";
 import Reviews from "@/components/productPage/reviews";
 import User from "@/models/User";
+import Order from "@/models/Order";
+import { getSession } from "next-auth/react";
 
-export default function product({ product, country }) {
+export default function product({ product, country, isReview, orderId }) {
   const [activeImg, setActiveImg] = useState("");
+  console.log(orderId);
   return (
     <>
       <Head>
@@ -32,7 +35,7 @@ export default function product({ product, country }) {
             <MainSwiper images={product.images} activeImg={activeImg} />
             <Infos product={product} setActiveImg={setActiveImg} />
           </div>
-          <Reviews product={product} />
+          <Reviews product={product} isReview={isReview} orderId={orderId} />
         </div>
       </div>
     </>
@@ -40,7 +43,9 @@ export default function product({ product, country }) {
 }
 
 export async function getServerSideProps(context) {
-  const { query } = context;
+  const { query, req } = context;
+  const session = await getSession({ req });
+
   const slug = query.slug;
   const style = query.style;
   const size = query.size || 0;
@@ -55,6 +60,7 @@ export async function getServerSideProps(context) {
 
   let product = await Product.findOne({
     slug,
+    "subProducts.isDisabled": false, // Add this condition to filter out disabled products
   })
     .populate({
       path: "category",
@@ -66,6 +72,9 @@ export async function getServerSideProps(context) {
       model: User,
     })
     .lean();
+  product.subProducts = product.subProducts.filter(
+    (sub) => sub.isDisabled === false
+  );
   let subProduct = product.subProducts[style];
   let prices = subProduct.sizes.map((s) => s.price).sort((a, b) => a - b);
   const newProduct = {
@@ -147,6 +156,27 @@ export async function getServerSideProps(context) {
       product.reviews.length
     ).toFixed(1);
   }
+  let orders = await Order.find({ user: session?.user.id })
+    .sort({
+      createdAt: -1,
+    })
+    .lean();
+  let isReview = false;
+  let orderId;
+  for (const order of orders) {
+    if (order.status === "Đã Hoàn Thành") {
+      for (const product of order.products) {
+        // console.log(newProduct._id.toString(), product.product.toString());
+        if (newProduct._id.toString() == product.product.toString()) {
+          isReview = product.isReview;
+          orderId = order._id.toString();
+          console.log(orderId);
+          break;
+        }
+      }
+    }
+  }
+  console.log(orderId);
   db.disconnectDB();
   return {
     props: {
@@ -155,6 +185,8 @@ export async function getServerSideProps(context) {
         name: data.name,
         flag: data.flag.emojitwo,
       },
+      isReview: isReview,
+      orderId: orderId || null,
     },
   };
 }

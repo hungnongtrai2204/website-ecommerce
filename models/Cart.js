@@ -32,6 +32,9 @@ const cartSchema = new mongoose.Schema(
           image: String,
         },
         price: Number,
+        sku: {
+          type: String,
+        },
       },
     ],
     cartTotal: Number,

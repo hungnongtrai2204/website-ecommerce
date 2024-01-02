@@ -41,14 +41,22 @@ export default function Summary({
         setOrder_Error("Vui lòng chọn địa chỉ giao hàng.");
         return;
       }
+      console.log("Cart", cart);
       const { data } = await axios.post("/api/order/create", {
-        products: cart.products,
+        products: cart.products.map((p) => ({ ...p, isReview: false })),
         shippingAddress: selectedAddress,
         paymentMethod,
         total: totalAfterDiscount !== "" ? totalAfterDiscount : cart.cartTotal,
         totalBeforeDiscount: cart.cartTotal,
         couponApplied: coupon,
       });
+      for (const product of cart.products) {
+        const res = await axios.post(`/api/product/${product.product}`, {
+          sizeToUpdate: product.size,
+          updateQtyValue: product.qty,
+          sku: product.sku,
+        });
+      }
       // Router.push(`/order/${data.order_id}`);
       router.push(`/order/${data.order_id}`);
     } catch (error) {
