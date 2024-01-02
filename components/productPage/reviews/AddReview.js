@@ -10,7 +10,7 @@ import dataURItoBlob from "@/utils/dataURItoBlob";
 import { uploadImages } from "@/requests/upload";
 import axios from "axios";
 import { ClipLoader } from "react-spinners";
-export default function AddReview({ product, setReviews }) {
+export default function AddReview({ product, setReviews, orderId }) {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   // useEffect(() => {
@@ -26,6 +26,7 @@ export default function AddReview({ product, setReviews }) {
   const handleSubmit = async () => {
     setLoading(true);
     let msgs = [];
+
     if (!size) {
       msgs.push({
         msg: "Vui lòng chọn một kích thước!",
@@ -91,6 +92,10 @@ export default function AddReview({ product, setReviews }) {
       setImages([]);
       setRating(0);
       setReview("");
+      const res = await axios.put(`/api/order/${orderId}/changeIsReview`, {
+        productId: product._id.toString(),
+      });
+      setLoading(false);
     }
     setLoading(false);
   };

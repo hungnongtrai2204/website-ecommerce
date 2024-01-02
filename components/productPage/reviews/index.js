@@ -5,7 +5,7 @@ import AddReview from "./AddReview";
 import Table from "./Table";
 import { useState } from "react";
 
-export default function Reviews({ product }) {
+export default function Reviews({ product, isReview, orderId }) {
   const { data: session } = useSession();
   const [reviews, setReviews] = useState(product.reviews);
   return (
@@ -53,11 +53,15 @@ export default function Reviews({ product }) {
             ))}
           </div>
         </div>
-        {session ? (
-          <AddReview product={product} setReviews={setReviews} />
+        {session && isReview === false ? (
+          <AddReview
+            product={product}
+            setReviews={setReviews}
+            orderId={orderId}
+          />
         ) : (
           <button className={styles.login_btn} onClick={() => signIn()}>
-            Đăng nhập để đánh giá sản phẩm
+            Bạn đã đánh giá sản phẩm
           </button>
         )}
         <Table

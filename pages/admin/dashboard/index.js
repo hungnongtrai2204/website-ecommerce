@@ -16,10 +16,13 @@ import { io } from "socket.io-client";
 import { useEffect } from "react";
 export default function Dashboard({ users, orders, products }) {
   const { data: session } = useSession();
-  useEffect(() => {
-    const socket = io("http://localhost:5000");
-    console.log(socket);
-  }, []);
+  // useEffect(() => {
+  //   const socket = io("http://localhost:8000");
+  //   console.log("Socket", socket);
+  //   socket.on("firstEvent", (msg) => {
+  //     console.log("Msg", msg);
+  //   });
+  // }, []);
   return (
     <div>
       <Head>
@@ -146,7 +149,9 @@ export default function Dashboard({ users, orders, products }) {
                     </td>
                     <td>
                       <Link href={`/order/${order._id}`}>
-                        <SlEye />
+                        <div className="flex justify-end items-end">
+                          <SlEye />
+                        </div>
                       </Link>
                     </td>
                   </tr>

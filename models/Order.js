@@ -34,6 +34,10 @@ const orderSchema = new mongoose.Schema(
         price: {
           type: Number,
         },
+        isReview: {
+          type: Boolean,
+          default: false,
+        },
       },
     ],
     shippingAddress: {
@@ -117,6 +121,7 @@ const orderSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    strict: false,
   }
 );
 

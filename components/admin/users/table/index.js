@@ -77,13 +77,13 @@ const headCells = [
   },
   {
     id: "verified",
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: "Đã Xác Minh",
   },
   {
     id: "admin",
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: "Quản Trị Viên",
   },
@@ -239,6 +239,21 @@ export default function EnhancedTable({ rows }) {
   };
 
   const handleClick = (event, id) => {
+    // const selectedIndex = selected.indexOf(id);
+    // let newSelected = [];
+    // if (selectedIndex === -1) {
+    //   newSelected = newSelected.concat(selected, id);
+    // } else if (selectedIndex === 0) {
+    //   newSelected = newSelected.concat(selected.slice(1));
+    // } else if (selectedIndex === selected.length - 1) {
+    //   newSelected = newSelected.concat(selected.slice(0, -1));
+    // } else if (selectedIndex > 0) {
+    //   newSelected = newSelected.concat(
+    //     selected.slice(0, selectedIndex),
+    //     selected.slice(selectedIndex + 1)
+    //   );
+    // }
+    // setSelected(newSelected);
     const selectedIndex = selected.indexOf(id);
     let newSelected = [];
 
@@ -255,6 +270,7 @@ export default function EnhancedTable({ rows }) {
       );
     }
     setSelected(newSelected);
+    console.log(selected);
   };
 
   const handleChangePage = (event, newPage) => {
@@ -306,17 +322,17 @@ export default function EnhancedTable({ rows }) {
             />
             <TableBody>
               {visibleRows.map((row, index) => {
-                const isItemSelected = isSelected(row.id);
+                const isItemSelected = isSelected(row._id);
                 const labelId = `enhanced-table-checkbox-${index}`;
 
                 return (
                   <TableRow
                     hover
-                    onClick={(event) => handleClick(event, row.id)}
+                    onClick={(event) => handleClick(event, row._id)}
                     role="checkbox"
                     aria-checked={isItemSelected}
                     tabIndex={-1}
-                    key={row.id}
+                    key={row._id}
                     selected={isItemSelected}
                     sx={{ cursor: "pointer" }}
                   >

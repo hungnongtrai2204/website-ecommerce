@@ -58,6 +58,8 @@ export async function getServerSideProps(ctx) {
     .lean();
   const categories = await Category.find().lean();
 
+  // Update all products to set isDisabled to false
+
   await db.disconnectDB();
   return {
     props: {

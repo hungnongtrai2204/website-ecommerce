@@ -4,6 +4,9 @@ import Link from "next/link";
 import ProductSwiper from "./productSwiper";
 
 export default function ProductCard({ product }) {
+  product.subProducts = product.subProducts.filter(
+    (sub) => sub.isDisabled === false
+  );
   const [active, setActive] = useState(0);
   const [images, setImages] = useState(product.subProducts[active]?.images);
   const [prices, setPrices] = useState(
@@ -37,7 +40,7 @@ export default function ProductCard({ product }) {
           ""
         )}
         <div className={styles.product__infos}>
-          <h1>
+          <h1 className="font-bold">
             {product.name.length > 45
               ? `${product.name.substring(0, 45)}...`
               : product.name}

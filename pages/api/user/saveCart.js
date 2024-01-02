@@ -22,6 +22,7 @@ router.post(async (req, res) => {
       let subProduct = dbProduct.subProducts[cart[i].style];
       let tempProduct = {};
       tempProduct.name = dbProduct.name;
+      tempProduct.sku = subProduct.sku;
       tempProduct.product = dbProduct._id;
       tempProduct.color = {
         color: cart[i].color.color,

@@ -43,4 +43,51 @@ router.get(async (req, res) => {
   }
 });
 
+async function updateQty(productId, sku, size, updateQty) {
+  try {
+    const result = await Product.updateOne(
+      {
+        _id: productId,
+        "subProducts.sku": sku,
+        "subProducts.sizes.size": size,
+      },
+      {
+        $inc: {
+          "subProducts.$.sizes.$[size].qty": -updateQty,
+        },
+      },
+      {
+        arrayFilters: [{ "size.size": size }],
+      }
+    );
+
+    if (result.nModified === 0) {
+      throw new Error("Product, SKU, or size not found");
+    }
+
+    console.log(`Qty updated successfully for SKU: ${sku} and size: ${size}`);
+  } catch (error) {
+    console.error(`Error updating qty: ${error.message}`);
+    throw error;
+  }
+}
+
+router.post(async (req, res) => {
+  try {
+    db.connectDB();
+    const productId = req.query.id;
+
+    const { sku, sizeToUpdate, updateQtyValue } = req.body;
+
+    await updateQty(productId, sku, sizeToUpdate, updateQtyValue);
+
+    db.disconnectDB();
+    return res.json({
+      message: "Update successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+});
+
 export default router.handler();

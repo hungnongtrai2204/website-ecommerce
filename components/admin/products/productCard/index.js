@@ -7,7 +7,31 @@ import Link from "next/link";
 import { TbEdit } from "react-icons/tb";
 import { AiOutlineEye } from "react-icons/ai";
 import { RiDeleteBin2Line } from "react-icons/ri";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useState } from "react";
+
 export default function ProductCard({ product }) {
+  const [subProducts, setSubProducts] = useState(
+    product.subProducts.filter((sub) => sub.isDisabled === false)
+  );
+
+  const disableHandler = async (sku) => {
+    try {
+      const { data } = await axios.put(`/api/product/${product._id}/disable`, {
+        sku: sku,
+        isDisabled: true,
+      });
+      setSubProducts((prevSubProducts) =>
+        prevSubProducts
+          .map((sub) => (sub.sku === sku ? { ...sub, isDisabled: true } : sub))
+          .filter((sub) => sub.isDisabled === false)
+      );
+      toast.success(data.message);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
   return (
     <div className={styles.product}>
       <h1 className={`${styles.product__name} font-bold`}>{product.name}</h1>
@@ -37,7 +61,7 @@ export default function ProductCard({ product }) {
           },
         }}
       >
-        {product.subProducts.map((p, i) => (
+        {subProducts.map((p, i) => (
           <SwiperSlide>
             <div className={styles.product__item}>
               <div className={styles.product__item_img}>
@@ -56,13 +80,13 @@ export default function ProductCard({ product }) {
                     }}
                   />
                 </Link>
-                <Link href="">
+                <div onClick={() => disableHandler(p.sku)}>
                   <RiDeleteBin2Line
                     style={{
                       fill: "#ed4337",
                     }}
                   />
-                </Link>
+                </div>
               </div>
             </div>
           </SwiperSlide>
